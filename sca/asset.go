@@ -3,11 +3,13 @@ package sca
 import "github.com/kyselabs/kyse-sdk-go/entities"
 
 type Resource struct {
+	Source string  `json:"source" example:"requirements.txt"`
 	Vendor string  `json:"vendor" example:"PyPI"`
 	Assets []Asset `json:"assets"`
 }
 
 type VerdictedResource struct {
+	Source string           `json:"source,omitempty"`
 	Vendor string           `json:"vendor" example:"PyPI"`
 	Assets []VerdictedAsset `json:"assets"`
 }
