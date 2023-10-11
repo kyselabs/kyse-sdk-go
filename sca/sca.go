@@ -1,9 +1,7 @@
 package sca
 
 import (
-	"fmt"
 	"net/http"
-	"os"
 
 	"github.com/kyselabs/kyse-sdk-go/kyse"
 	"github.com/kyselabs/kyse-sdk-go/rest"
@@ -17,7 +15,7 @@ func NewSCA(kyse *kyse.Kyse) *SCA {
 	return &SCA{Kyse: kyse}
 }
 
-func (s *SCA) Audit(resources []Resource) (verdictedResources []VerdictedResource) {
+func (s *SCA) Audit(resources []Resource) (verdictedResources []VerdictedResource, err error) {
 	response, err := s.Kyse.RestClient.Request(
 		http.MethodPost,
 		"/sca/audit",
@@ -26,8 +24,7 @@ func (s *SCA) Audit(resources []Resource) (verdictedResources []VerdictedResourc
 	)
 
 	if err != nil {
-		fmt.Println("The server is under maintenance. Please try again later.")
-		os.Exit(1)
+		return nil, err
 	}
 
 	response.Unmarshal(&verdictedResources)
