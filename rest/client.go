@@ -37,7 +37,9 @@ func (c *Client) Request(method string, path string, headers map[string]string, 
 		req.Header.Set(header, value)
 	}
 
-	doResponse, err := c.HttpClient.Do(req)
-	return &Response{Response: *doResponse}, err
-
+	if doResponse, err := c.HttpClient.Do(req); err == nil {
+		return &Response{Response: *doResponse}, err
+	} else {
+		return nil, err
+	}
 }

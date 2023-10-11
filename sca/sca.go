@@ -1,7 +1,9 @@
 package sca
 
 import (
+	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/kyselabs/kyse-sdk-go/kyse"
 	"github.com/kyselabs/kyse-sdk-go/rest"
@@ -23,9 +25,12 @@ func (s *SCA) Audit(resources []Resource) (verdictedResources []VerdictedResourc
 		resources,
 	)
 
-	if err == nil {
-		response.Unmarshal(&verdictedResources)
+	if err != nil {
+		fmt.Println("The server is under maintenance. Please try again later.")
+		os.Exit(1)
 	}
+
+	response.Unmarshal(&verdictedResources)
 
 	return
 }
