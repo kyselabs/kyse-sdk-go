@@ -50,7 +50,7 @@ func main() {
 	// AUTH_API_ADDRESS=http://localhost:8443
 
 	// Create a Kyse Instance
-	kyse := sdk.NewKyse(&auth.KeyBased{Key: ""}, nil)
+	kyse := sdk.NewKyse(&auth.KeyBased{Key: ""}, nil, "UserAgent")
 
 	client := sca.NewSCA(kyse)
 

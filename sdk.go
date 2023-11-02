@@ -23,9 +23,13 @@ func init() {
 	}
 }
 
-func NewKyse(authMethod auth.AuthMethod, callbackToken func(token *auth.Token)) *kyse.Kyse {
+func NewKyse(
+	authMethod auth.AuthMethod,
+	callbackToken func(token *auth.Token),
+	userAgent string,
+) *kyse.Kyse {
 	return &kyse.Kyse{
-		AuthClient: auth.NewAuthClient(authAPI, authMethod, callbackToken),
-		RestClient: rest.NewRestClient(kyseAPI),
+		AuthClient: auth.NewAuthClient(authAPI, authMethod, callbackToken, userAgent),
+		RestClient: rest.NewRestClient(kyseAPI, userAgent),
 	}
 }

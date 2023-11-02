@@ -24,8 +24,8 @@ type RefreshTokenPayload struct {
 	RefreshToken string `json:"refresh_token"`
 }
 
-func NewAuthClient(url string, authMethod AuthMethod, callbackToken func(token *Token)) *Client {
-	restClient := rest.NewRestClient(url)
+func NewAuthClient(url string, authMethod AuthMethod, callbackToken func(token *Token), userAgent string) *Client {
+	restClient := rest.NewRestClient(url, userAgent)
 	if authMethod != nil {
 		authMethod.SetRestClient(restClient)
 	}
